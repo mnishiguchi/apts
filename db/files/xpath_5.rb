@@ -1,0 +1,13 @@
+/PhysicalProperty/Property[]/Identification
+/PhysicalProperty/Property[]/PropertyID/Identification[]
+/PhysicalProperty/Property[]/PropertyID/Address
+/PhysicalProperty/Property[]/PropertyID/Phone
+/PhysicalProperty/Property[]/ILS_Identification
+/PhysicalProperty/Property[]/Information/OfficeHour[]
+/PhysicalProperty/Property[]/Information/Rents
+/PhysicalProperty/Property[]/Floorplan[]/Identification
+/PhysicalProperty/Property[]/Floorplan[]/Room[]
+/PhysicalProperty/Property[]/Floorplan[]/Deposit/Amount
+/PhysicalProperty/Property[]/Floorplan[]/File[]
+/PhysicalProperty/Property[]/File[]
+/PhysicalProperty/Property[]/Floorplan[]/File

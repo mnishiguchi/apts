@@ -1,0 +1,9 @@
+/PhysicalProperty/Property[]/PropertyID/Identification
+/PhysicalProperty/Property[]/PropertyID/Address
+/PhysicalProperty/Property[]/PropertyID/Phone
+/PhysicalProperty/Property[]/Information/OfficeHour[]
+/PhysicalProperty/Property[]/Feature[]
+/PhysicalProperty/Property[]/FeaturedButton[]
+/PhysicalProperty/Property[]/Slideshow
+/PhysicalProperty/Property[]/Floorplan[]
+/PhysicalProperty/Property[]/NearbyCommunity[]

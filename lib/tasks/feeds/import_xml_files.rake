@@ -19,7 +19,7 @@ namespace :feeds do
 
     # Write it to files.
     feed_hashes.each_with_index do |feed_hash, i|
-      path = Rails.root.join("db", "files", "#{i}.rb")
+      path = Rails.root.join("db", "files", "hash_#{i}.rb")
       File.write(path, feed_hash)
     end
   end

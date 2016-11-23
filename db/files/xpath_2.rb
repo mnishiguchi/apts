@@ -1,0 +1,14 @@
+/PhysicalProperty/Property[]/Identification/Address
+/PhysicalProperty/Property[]/Identification/Fax
+/PhysicalProperty/Property[]/Information/OfficeHour[]
+/PhysicalProperty/Property[]/OnSiteContact/Phone
+/PhysicalProperty/Property[]/Policy/Pet[]
+/PhysicalProperty/Property[]/Floorplan[]/Room[]
+/PhysicalProperty/Property[]/Floorplan[]/Deposit
+/PhysicalProperty/Property[]/Floorplan[]/Amenities
+/PhysicalProperty/Property[]/Amenities/Community/General[]
+/PhysicalProperty/Property[]/Amenities/Floorplan/General[]
+/PhysicalProperty/Property[]/Utility
+/PhysicalProperty/Property[]/File[]
+/PhysicalProperty/Property[]/Identification/Phone
+/PhysicalProperty/Property[]/Amenities/Floorplan

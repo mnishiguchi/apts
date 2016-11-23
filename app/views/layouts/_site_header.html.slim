@@ -1,0 +1,9 @@
+.site_header
+  .container
+    a#logo href="#{root_path}"
+      | APTS
+    - if identity_signed_in?
+      .nav-item
+        = current_identity.email if current_identity
+        .badge = current_identity&.backend_user_type || "User"
+      = render "layouts/logged_in_dropdown"

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_current_identity
 
   include ApplicationHelper
+  include FieldPathMappingsHelper
 
   # Set up the first arguemnt of Pundit's Policies.
   # NOTE: By default, Pundit uses current_user.

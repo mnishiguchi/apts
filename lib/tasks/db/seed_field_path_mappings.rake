@@ -3,8 +3,6 @@ namespace :db do
   task :seed_field_path_mappings => :environment do
 
     # TODO
-    
-
-
+     
   end
 end

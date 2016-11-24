@@ -28,11 +28,9 @@ ActiveRecord::Schema.define(version: 20161124004957) do
   end
 
   create_table "feed_sources", force: :cascade do |t|
-    t.string   "url",                null: false
-    t.string   "xpaths",                          array: true
-    t.json     "field_path_mapping"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.string   "url",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "feeds", force: :cascade do |t|

@@ -7,3 +7,29 @@
         = current_identity.email if current_identity
         .badge = current_identity&.backend_user_type || "User"
       = render "layouts/logged_in_dropdown"
+    - else
+      a.nav-item.pull-right[
+        data-target="#signup_modal__target" 
+        data-toggle="modal" 
+        type="button"
+      ] 
+        | Sign up
+      #signup_modal__target.modal.fade[
+        aria-labelledby="signup_modal__label" 
+        role="dialog" 
+        tabindex="-1"
+      ]
+        = render "signup_modal"
+      
+      a.nav-item.pull-right[
+        data-target="#login_modal__target" 
+        data-toggle="modal" 
+        type="button"
+      ] 
+        | Log in
+      #login_modal__target.modal.fade[
+        aria-labelledby="login_modal__label" 
+        role="dialog" 
+        tabindex="-1"
+      ]
+        = render "login_modal"

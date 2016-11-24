@@ -29,16 +29,14 @@ class FeedSource < ApplicationRecord
 
   def import_xml_from_url
     # http://www.nokogiri.org/tutorials/parsing_an_html_xml_document.html#from_the_internets
-    Nokogiri::XML(open(url))
+    Nokogiri::XML(open(url)) { |config| config.strict.nonet.noblanks }
   end
 
   # Generates an array of all the xpath from a Nokogiri-parsed document.
   # Duplicate xpaths will be removed and array indices will be replaced with `[]`.
   def all_xpaths(xml_doc)
     # http://stackoverflow.com/a/15692699/3837223
-    xpaths = xml_doc.xpath('//*').map do |node|
-      node.path.gsub(/\[\d*\]/, "[]")
-    end.uniq
+    xml_doc.xpath('//*').map { |node| node.path.gsub(/\[\d*\]/, "[]") }.uniq
   end
 
   # Set the xpaths of this feed source.

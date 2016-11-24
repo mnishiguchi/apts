@@ -41,6 +41,6 @@ admin:
 ## Gems / Libraries
 
 #### XML parsing
-- [http://www.nokogiri.org/](http://www.nokogiri.org/tutorials/parsing_an_html_xml_document.html#from_a_file)
-- [Nokogiri Wiki](https://github.com/sparklemotion/nokogiri/wiki)
-- [rubydoc](http://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Document)
+- [Nokogiri tutorials](http://www.nokogiri.org/tutorials/parsing_an_html_xml_document.html)
+- [Nokogiri wiki](https://github.com/sparklemotion/nokogiri/wiki)
+- [Nokogiri rubydoc](http://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Document)

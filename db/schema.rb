@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009010435) do
+ActiveRecord::Schema.define(version: 20161124004957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,23 @@ ActiveRecord::Schema.define(version: 20161009010435) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "feed_sources", force: :cascade do |t|
+    t.string   "url",                null: false
+    t.string   "xpaths",                          array: true
+    t.json     "field_path_mapping"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "feeds", force: :cascade do |t|
+    t.text     "raw_xml",        null: false
+    t.string   "xpaths",         null: false, array: true
+    t.integer  "feed_source_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["feed_source_id"], name: "index_feeds_on_feed_source_id", using: :btree
   end
 
   create_table "identities", force: :cascade do |t|
@@ -95,4 +112,5 @@ ActiveRecord::Schema.define(version: 20161009010435) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "feeds", "feed_sources"
 end

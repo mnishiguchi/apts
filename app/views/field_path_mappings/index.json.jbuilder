@@ -1,1 +1,0 @@
-json.array! @field_path_mappings, partial: 'field_path_mappings/field_path_mapping', as: :field_path_mapping

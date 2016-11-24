@@ -16,11 +16,16 @@ table.table.table-bordered
     tr
       th Fields
       th Xpaths
+      th Example data
   tbody
-    - except = ["id", "created_at", "updated_at", "feed_source_id"]
-    - attrs = @field_path_mapping.attributes.except(*except)
+    - last_feed = FeedSource.for_url(@field_path_mapping.feed_source.url).feeds.last
+    - xml_doc   = Nokogiri::XML(last_feed.raw_xml) { |config| config.noerror }
+    - except    = ["id", "created_at", "updated_at", "feed_source_id"]
+    - attrs     = @field_path_mapping.attributes.except(*except)
     - attrs.each do |field, xpath|
+      - example_data = xpath.present? ? xml_doc.at(xpath).text : "" rescue "(error)"
       tr
         td= field.titleize
         td= xpath
+        td= example_data
         

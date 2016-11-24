@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124004957) do
+ActiveRecord::Schema.define(version: 20161124134315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,38 @@ ActiveRecord::Schema.define(version: 20161124004957) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["feed_source_id"], name: "index_feeds_on_feed_source_id", using: :btree
+  end
+
+  create_table "field_path_mappings", force: :cascade do |t|
+    t.string   "location_address_1"
+    t.string   "location_address_2"
+    t.string   "location_city"
+    t.string   "location_state"
+    t.string   "location_zip"
+    t.string   "location_latiitude"
+    t.string   "location_longitude"
+    t.string   "marketing_name"
+    t.string   "contact_phone"
+    t.string   "contact_email"
+    t.string   "website"
+    t.string   "description"
+    t.string   "floorplan_name"
+    t.string   "floorplan_square_feed"
+    t.string   "floorplan_market_rent"
+    t.string   "floorplan_effective_rent"
+    t.string   "floorplan_bedroops"
+    t.string   "floorplan_bathrooms"
+    t.string   "floorplan_availability"
+    t.string   "file_floorplan"
+    t.string   "file_property"
+    t.string   "amenities_community"
+    t.string   "amenities_floorplan"
+    t.string   "pet_dog"
+    t.string   "pet_cat"
+    t.integer  "feed_source_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["feed_source_id"], name: "index_field_path_mappings_on_feed_source_id", using: :btree
   end
 
   create_table "identities", force: :cascade do |t|
@@ -111,4 +143,5 @@ ActiveRecord::Schema.define(version: 20161124004957) do
   end
 
   add_foreign_key "feeds", "feed_sources"
+  add_foreign_key "field_path_mappings", "feed_sources"
 end

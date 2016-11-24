@@ -10,6 +10,7 @@
 
 class FeedSource < ApplicationRecord
   has_many :feeds
+  has_many :field_path_mappings
 
   def self.for_url(url)
     self.where(url: url).first_or_create!

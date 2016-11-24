@@ -20,7 +20,7 @@ class FeedSource < ApplicationRecord
 
   def import_feed
     xml_doc = import_xml_from_url
-    self.feeds.create(raw_xml: xml_doc, xpaths:  xpaths_for_xml_doc(xml_doc))
+    self.feeds.create(raw_xml: xml_doc, xpaths:  xpaths_for_xml_doc(xml_doc).sort)
   end
 
   # Get a most recent list of all the xpaths of this feed source.

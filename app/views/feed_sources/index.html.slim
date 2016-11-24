@@ -1,0 +1,15 @@
+= provide(:title, "All feed sources")
+
+h1.page-header 
+  | All feed sources
+
+table.table.table-bordered
+  thead
+    tr
+      th Url
+      th
+  tbody
+    - @feed_sources.each do |feed_source|
+      tr
+        td = feed_source.url
+        td = link_to 'Details', feed_source

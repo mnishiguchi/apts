@@ -21,16 +21,17 @@ namespace :feeds do
     # Write it to files.
     parsed_xml_documents.each_with_index do |parsed_doc, i|
       path = Rails.root.join("db", "files", "xpath_#{i}.rb")
-      xpaths = uniq_xpaths(parsed_doc).join("\n")
+      xpaths = all_xpaths(parsed_doc).join("\n")
       File.write(path, xpaths)
     end
   end
 end
 
-def uniq_xpaths(parsed_doc)
-  xpaths = []
-  parsed_doc.xpath('//*[child::* and not(child::*/*)]').each do |node|
-    xpaths << node.path
-  end
-  xpaths.each { |path| path.gsub!(/\[\d*\]/, "[]") }.uniq!
+# Generates an array of all the xpath from a Nokogiri-parsed document.
+# Duplicate xpaths will be removed and array indices will be replaced with `[]`.
+# http://stackoverflow.com/a/15692699/3837223
+def all_xpaths(parsed_doc)
+  xpaths = parsed_doc.xpath('//*').map do |node|
+    node.path.gsub(/\[\d*\]/, "[]")
+  end.uniq
 end

@@ -34,6 +34,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'pry-rescue'
   gem 'pry-byebug'
+  gem 'webmock'
 end
 
 group :development do

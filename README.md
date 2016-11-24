@@ -22,7 +22,6 @@ etc
 ```bash
 rails db:create
 rails db:migrate
-rails db:create
 rails db:seed
 ```
 
@@ -44,3 +43,4 @@ admin:
 #### XML parsing
 - [http://www.nokogiri.org/](http://www.nokogiri.org/tutorials/parsing_an_html_xml_document.html#from_a_file)
 - [Nokogiri Wiki](https://github.com/sparklemotion/nokogiri/wiki)
+- [rubydoc](http://www.rubydoc.info/github/sparklemotion/nokogiri/Nokogiri/XML/Document)

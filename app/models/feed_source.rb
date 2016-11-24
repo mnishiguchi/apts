@@ -10,30 +10,40 @@
 #  updated_at         :datetime         not null
 #
 
-# https://ruby-doc.org/stdlib-2.3.0/libdoc/open-uri/rdoc/OpenURI.html
-require 'open-uri'
-
 class FeedSource < ApplicationRecord
   has_many :feeds
 
-  after_save :set_xpaths
+  before_save :set_xpaths
 
   def self.for_url(url)
-    self.first_or_create!(url: url)
+    self.where(url: url).first_or_create!
   end
 
-  private def set_xpaths
+  def import_feed
+    xml_doc = self.import_xml_from_url
+    self.feeds.create(
+      raw_xml: xml_doc,
+      xpaths:  self.all_xpaths(xml_doc)
+    )
+  end
+
+  def import_xml_from_url
     # http://www.nokogiri.org/tutorials/parsing_an_html_xml_document.html#from_the_internets
-    parsed_doc = Nokogiri::XML(open(url))
-    self.xpath = all_xpaths(parsed_doc)
+    Nokogiri::XML(open(url))
   end
 
   # Generates an array of all the xpath from a Nokogiri-parsed document.
   # Duplicate xpaths will be removed and array indices will be replaced with `[]`.
-  # http://stackoverflow.com/a/15692699/3837223
-  private def all_xpaths(parsed_doc)
-    xpaths = parsed_doc.xpath('//*').map do |node|
+  def all_xpaths(xml_doc)
+    # http://stackoverflow.com/a/15692699/3837223
+    xpaths = xml_doc.xpath('//*').map do |node|
       node.path.gsub(/\[\d*\]/, "[]")
     end.uniq
+  end
+
+  # Set the xpaths of this feed source.
+  private def set_xpaths
+    # http://www.nokogiri.org/tutorials/parsing_an_html_xml_document.html#from_the_internets
+    self.xpaths = self.all_xpaths(self.import_xml_from_url)
   end
 end

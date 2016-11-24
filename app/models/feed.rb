@@ -12,4 +12,6 @@
 
 class Feed < ApplicationRecord
   belongs_to :feed_source
+
+  validates :raw_xml, uniqueness: true
 end

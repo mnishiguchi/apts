@@ -1,6 +1,11 @@
 class CreateFieldPathMappings < ActiveRecord::Migration[5.0]
   def change
     create_table :field_path_mappings do |t|
+      t.string :marketing_name
+      t.string :website
+      t.string :description
+      t.string :contact_phone
+      t.string :contact_email
       t.string :location_address_1
       t.string :location_address_2
       t.string :location_city
@@ -8,11 +13,6 @@ class CreateFieldPathMappings < ActiveRecord::Migration[5.0]
       t.string :location_zip
       t.string :location_latiitude
       t.string :location_longitude
-      t.string :marketing_name
-      t.string :contact_phone
-      t.string :contact_email
-      t.string :website
-      t.string :description
       t.string :floorplan_name
       t.string :floorplan_square_feed
       t.string :floorplan_market_rent

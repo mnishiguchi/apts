@@ -11,11 +11,11 @@
 require "test_helper"
 
 class FeedSourceTest < ActiveSupport::TestCase
-  def feed_source
-    @feed_source ||= FeedSource.new
-  end
-
-  def test_valid
-    assert feed_source.valid?
-  end
+  # def feed_source
+  #   @feed_source ||= FeedSource.new
+  # end
+  #
+  # def test_valid
+  #   assert feed_source.valid?
+  # end
 end

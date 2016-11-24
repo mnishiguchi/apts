@@ -1,0 +1,31 @@
+= simple_form_for(@field_path_mapping) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :location_address_1
+    = f.input :location_address_2
+    = f.input :location_city
+    = f.input :location_state
+    = f.input :location_zip
+    = f.input :location_latiitude
+    = f.input :location_longitude
+    = f.input :marketing_name
+    = f.input :contact_phone
+    = f.input :contact_email
+    = f.input :website
+    = f.input :description
+    = f.input :floorplan_name
+    = f.input :floorplan_square_feed
+    = f.input :floorplan_market_rent
+    = f.input :floorplan_effective_rent
+    = f.input :floorplan_bedroops
+    = f.input :floorplan_bathrooms
+    = f.input :floorplan_availability
+    = f.input :file_floorplan
+    = f.input :file_property
+    = f.input :amenities_community
+    = f.input :amenities_floorplan
+    = f.input :pet_dog
+    = f.input :pet_cat
+  .form-actions
+    = f.button :submit

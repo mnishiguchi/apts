@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
 
+
+  # ---
+  # Feeds
+  # ---
+
+
+  resources :field_path_mappings, only: [:index, :show, :edit, :update]
+
+
+  # ---
   # Authentication
+  # ---
+
+
   devise_for :identities,
     controllers: {
       sessions:           "identities/sessions",
@@ -23,6 +36,12 @@ Rails.application.routes.draw do
   # Soial profiles
   resources :social_profiles
 
+
+  # ---
+  # Users
+  # ---
+
+
   # Frontend user (singular)
   resource :user
 
@@ -32,7 +51,19 @@ Rails.application.routes.draw do
   resources :management_clients, only: [:show]
   resources :property_clients, only: [:show]
 
+
+  # ---
+  # Root
+  # ---
+
+
   root to: "static_pages#home"
+
+
+  # ---
+  # Developement
+  # ---
+
 
   # For viewing delivered emails in development environment.
   if Rails.env.development?

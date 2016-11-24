@@ -1,0 +1,1 @@
+json.partial! "field_path_mappings/field_path_mapping", field_path_mapping: @field_path_mapping

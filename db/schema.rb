@@ -43,6 +43,11 @@ ActiveRecord::Schema.define(version: 20161124134315) do
   end
 
   create_table "field_path_mappings", force: :cascade do |t|
+    t.string   "marketing_name"
+    t.string   "website"
+    t.string   "description"
+    t.string   "contact_phone"
+    t.string   "contact_email"
     t.string   "location_address_1"
     t.string   "location_address_2"
     t.string   "location_city"
@@ -50,11 +55,6 @@ ActiveRecord::Schema.define(version: 20161124134315) do
     t.string   "location_zip"
     t.string   "location_latiitude"
     t.string   "location_longitude"
-    t.string   "marketing_name"
-    t.string   "contact_phone"
-    t.string   "contact_email"
-    t.string   "website"
-    t.string   "description"
     t.string   "floorplan_name"
     t.string   "floorplan_square_feed"
     t.string   "floorplan_market_rent"

@@ -15,7 +15,7 @@
 #  location_latiitude       :string
 #  location_longitude       :string
 #  floorplan_name           :string
-#  floorplan_square_feed    :string
+#  floorplan_square_feet    :string
 #  floorplan_market_rent    :string
 #  floorplan_effective_rent :string
 #  floorplan_bedrooms       :string

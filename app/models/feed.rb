@@ -13,5 +13,10 @@
 class Feed < ApplicationRecord
   belongs_to :feed_source
 
+  has_one :field_path_mapping, through: :feed_source
+
+  has_one :feed_property, dependent: :destroy
+  has_one :property, through: :feed_property
+
   validates :raw_xml, uniqueness: true
 end

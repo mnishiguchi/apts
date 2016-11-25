@@ -1,0 +1,35 @@
+h1 Listing floorplans
+
+table
+  thead
+    tr
+      th Name
+      th Square feet
+      th Market rent
+      th Effective rent
+      th Bedrooms
+      th Bathrooms
+      th Availability
+      th Amenity
+      th
+      th
+      th
+
+  tbody
+    - @floorplans.each do |floorplan|
+      tr
+        td = floorplan.name
+        td = floorplan.square_feet
+        td = floorplan.market_rent
+        td = floorplan.effective_rent
+        td = floorplan.bedrooms
+        td = floorplan.bathrooms
+        td = floorplan.availability
+        td = floorplan.amenity
+        td = link_to 'Show', floorplan
+        td = link_to 'Edit', edit_floorplan_path(floorplan)
+        td = link_to 'Destroy', floorplan, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Floorplan', new_floorplan_path

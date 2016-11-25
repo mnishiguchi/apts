@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124134315) do
+ActiveRecord::Schema.define(version: 20161125185020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,21 @@ ActiveRecord::Schema.define(version: 20161124134315) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "amenities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "feed_properties", force: :cascade do |t|
+    t.integer  "feed_id"
+    t.integer  "property_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["feed_id"], name: "index_feed_properties_on_feed_id", using: :btree
+    t.index ["property_id"], name: "index_feed_properties_on_property_id", using: :btree
   end
 
   create_table "feed_sources", force: :cascade do |t|
@@ -73,6 +88,27 @@ ActiveRecord::Schema.define(version: 20161124134315) do
     t.index ["feed_source_id"], name: "index_field_path_mappings_on_feed_source_id", using: :btree
   end
 
+  create_table "floorplan_amenities", force: :cascade do |t|
+    t.integer  "amenity_id"
+    t.integer  "floorplan_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["amenity_id"], name: "index_floorplan_amenities_on_amenity_id", using: :btree
+    t.index ["floorplan_id"], name: "index_floorplan_amenities_on_floorplan_id", using: :btree
+  end
+
+  create_table "floorplans", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "square_feet"
+    t.integer  "market_rent"
+    t.integer  "effective_rent"
+    t.integer  "bedrooms"
+    t.integer  "bathrooms"
+    t.integer  "availability"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "identities", force: :cascade do |t|
     t.string   "backend_user_type"
     t.integer  "backend_user_id"
@@ -108,6 +144,33 @@ ActiveRecord::Schema.define(version: 20161124134315) do
     t.index ["account_executive_id"], name: "index_management_clients_on_account_executive_id", using: :btree
   end
 
+  create_table "properties", force: :cascade do |t|
+    t.string   "marketing_name"
+    t.string   "website"
+    t.text     "description"
+    t.string   "contact_email"
+    t.string   "contact_phone"
+    t.string   "location_street"
+    t.string   "location_city"
+    t.string   "location_state"
+    t.string   "location_zip"
+    t.float    "location_latitude"
+    t.float    "location_longitude"
+    t.boolean  "pet_dog"
+    t.boolean  "pet_cat"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "property_amenities", force: :cascade do |t|
+    t.integer  "amenity_id"
+    t.integer  "property_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["amenity_id"], name: "index_property_amenities_on_amenity_id", using: :btree
+    t.index ["property_id"], name: "index_property_amenities_on_property_id", using: :btree
+  end
+
   create_table "property_clients", force: :cascade do |t|
     t.string   "name"
     t.integer  "account_executive_id"
@@ -141,6 +204,12 @@ ActiveRecord::Schema.define(version: 20161124134315) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "feed_properties", "feeds"
+  add_foreign_key "feed_properties", "properties"
   add_foreign_key "feeds", "feed_sources"
   add_foreign_key "field_path_mappings", "feed_sources"
+  add_foreign_key "floorplan_amenities", "amenities"
+  add_foreign_key "floorplan_amenities", "floorplans"
+  add_foreign_key "property_amenities", "amenities"
+  add_foreign_key "property_amenities", "properties"
 end

@@ -1,0 +1,49 @@
+h1 Listing properties
+
+table
+  thead
+    tr
+      th Marketing name
+      th Website
+      th Description
+      th Contact email
+      th Contact phone
+      th Location street
+      th Location city
+      th Location state
+      th Location zip
+      th Location latitude
+      th Location longitude
+      th Pet dog
+      th Pet cat
+      th Floorplan
+      th Amenity
+      th
+      th
+      th
+
+  tbody
+    - @properties.each do |property|
+      tr
+        td = property.marketing_name
+        td = property.website
+        td = property.description
+        td = property.contact_email
+        td = property.contact_phone
+        td = property.location_street
+        td = property.location_city
+        td = property.location_state
+        td = property.location_zip
+        td = property.location_latitude
+        td = property.location_longitude
+        td = property.pet_dog
+        td = property.pet_cat
+        td = property.floorplan
+        td = property.amenity
+        td = link_to 'Show', property
+        td = link_to 'Edit', edit_property_path(property)
+        td = link_to 'Destroy', property, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Property', new_property_path

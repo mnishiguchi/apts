@@ -1,0 +1,51 @@
+p#notice = notice
+
+p
+  strong Marketing name:
+  = @property.marketing_name
+p
+  strong Website:
+  = @property.website
+p
+  strong Description:
+  = @property.description
+p
+  strong Contact email:
+  = @property.contact_email
+p
+  strong Contact phone:
+  = @property.contact_phone
+p
+  strong Location street:
+  = @property.location_street
+p
+  strong Location city:
+  = @property.location_city
+p
+  strong Location state:
+  = @property.location_state
+p
+  strong Location zip:
+  = @property.location_zip
+p
+  strong Location latitude:
+  = @property.location_latitude
+p
+  strong Location longitude:
+  = @property.location_longitude
+p
+  strong Pet dog:
+  = @property.pet_dog
+p
+  strong Pet cat:
+  = @property.pet_cat
+p
+  strong Floorplan:
+  = @property.floorplan
+p
+  strong Amenity:
+  = @property.amenity
+
+= link_to 'Edit', edit_property_path(@property)
+'|
+= link_to 'Back', properties_path

@@ -2,8 +2,11 @@ namespace :db do
   desc "Seed database with fake data"
   task :seed => :environment do
 
+    if Rails.env.development?
+      Rake::Task["db:migrate:reset"].invoke
+    end
+
     invoke_tasks [
-      "db:migrate:reset",
       "db:seed_users",
       "db:seed_feed_sources",
       "db:import_feeds",

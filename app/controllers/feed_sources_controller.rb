@@ -3,7 +3,7 @@ class FeedSourcesController < ApplicationController
 
   # GET /feed_sources
   def index
-    @feed_sources = FeedSource.all
+    @feed_sources = FeedSource.includes(:field_path_mapping).all
   end
 
   # GET /feed_sources/1

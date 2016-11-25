@@ -6,10 +6,12 @@ h1.page-header
 table.table.table-bordered
   thead
     tr
-      th Url
-      th
+      th Source URL
+      th 
+      th 
   tbody
     - @feed_sources.each do |feed_source|
       tr
         td = feed_source.url
-        td = link_to 'Details', feed_source
+        td = link_to 'Xpaths', feed_source
+        td = link_to 'Field-path mapping', feed_source.field_path_mapping

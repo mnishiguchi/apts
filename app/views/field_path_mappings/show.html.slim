@@ -1,31 +1,21 @@
 = provide(:title, @field_path_mapping.class.name.titleize)
 
 h1.page-header 
-  | Field path mapping
-  small.pull-right
-    = link_to 'Edit', edit_field_path_mapping_path(@field_path_mapping)
-    |&nbsp;|&nbsp;
-    = link_to 'Back', field_path_mappings_path
+  = @field_path_mapping.class.name.titleize
   .h4
     | Source url: 
     span.text-muted
       = @field_path_mapping.feed_source.url
+    span.pull-right
+      = link_to 'Edit', edit_field_path_mapping_path(@field_path_mapping)
 
-table.table.table-bordered
-  thead
-    tr
-      th Fields
-      th Xpaths
-      th Example data
-  tbody
-    - last_feed = FeedSource.for_url(@field_path_mapping.feed_source.url).feeds.last
-    - xml_doc   = Nokogiri::XML(last_feed.raw_xml) { |config| config.noerror }
-    - except    = ["id", "created_at", "updated_at", "feed_source_id"]
-    - attrs     = @field_path_mapping.attributes.except(*except)
-    - attrs.each do |field, xpath|
-      - example_data = xpath.present? ? xml_doc.at(xpath).text : "" rescue "(error)"
-      tr
-        td= field.titleize
-        td= xpath
-        td= example_data
+- except = ["id", "created_at", "updated_at", "feed_source_id"]
+- @field_path_mapping.attributes.except(*except).each do |field, xpath|
+  .well
+    .h4
+      = field.titleize
+    pre
+      = xpath
+    pre
+      = @field_path_mapping.example_data_for_xpath(xpath)
         

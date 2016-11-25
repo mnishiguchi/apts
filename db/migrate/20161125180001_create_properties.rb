@@ -14,6 +14,7 @@ class CreateProperties < ActiveRecord::Migration[5.0]
       t.float :location_longitude
       t.boolean :pet_dog
       t.boolean :pet_cat
+      t.references :feed, index: true
 
       t.timestamps
     end

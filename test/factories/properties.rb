@@ -16,6 +16,7 @@
 #  location_longitude :float
 #  pet_dog            :boolean
 #  pet_cat            :boolean
+#  feed_id            :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

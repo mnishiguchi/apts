@@ -16,6 +16,7 @@
 #  location_longitude :float
 #  pet_dog            :boolean
 #  pet_cat            :boolean
+#  feed_id            :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
@@ -27,6 +28,6 @@ class Property < ApplicationRecord
 
   has_many :floorplans
 
-  has_many :property_amenities, dependent: :destroy
-  has_many :amenities, through: :property_amenities
+  has_many :property_property_amenities, dependent: :destroy
+  has_many :property_amenities, through: :property_property_amenities
 end

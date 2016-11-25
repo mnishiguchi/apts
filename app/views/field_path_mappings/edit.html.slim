@@ -1,14 +1,12 @@
 = provide(:title, @field_path_mapping.class.name.titleize)
 
 h1.page-header 
-  | Editting field path mapping
+  = @field_path_mapping.class.name.titleize
+
   .h4
     | Source url: 
     span.text-muted
       = @field_path_mapping.feed_source.url
-
-== render 'form'
-
-= link_to 'Show', @field_path_mapping
-'|
-= link_to 'Back', field_path_mappings_path
+    span.pull-right
+      = link_to 'Finish editing', @field_path_mapping
+= render 'form'

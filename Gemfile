@@ -25,6 +25,7 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+gem 'webmock'
 
 group :development, :test do
   gem 'factory_girl_rails'
@@ -34,7 +35,6 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'pry-rescue'
   gem 'pry-byebug'
-  gem 'webmock'
 end
 
 group :development do

@@ -1,33 +1,34 @@
 = simple_form_for(@field_path_mapping) do |f|
   = f.error_notification
 
-  - option_array = @field_path_mapping.feed_source.xpaths.map { |xpath| xpath.gsub("[]", "") }
   .form-inputs
     -# https://github.com/plataformatec/simple_form#collections
-    = f.input :location_address_1, collection: option_array
-    = f.input :location_address_2, collection: option_array
-    = f.input :location_city, collection: option_array
-    = f.input :location_state, collection: option_array
-    = f.input :location_zip, collection: option_array
-    = f.input :location_latiitude, collection: option_array
-    = f.input :location_longitude, collection: option_array
-    = f.input :marketing_name, collection: option_array
-    = f.input :contact_phone, collection: option_array
-    = f.input :contact_email, collection: option_array
-    = f.input :website, collection: option_array
-    = f.input :description, collection: option_array
-    = f.input :floorplan_name, collection: option_array
-    = f.input :floorplan_square_feed, collection: option_array
-    = f.input :floorplan_market_rent, collection: option_array
-    = f.input :floorplan_effective_rent, collection: option_array
-    = f.input :floorplan_bedroops, collection: option_array
-    = f.input :floorplan_bathrooms, collection: option_array
-    = f.input :floorplan_availability, collection: option_array
-    = f.input :file_floorplan, collection: option_array
-    = f.input :file_property, collection: option_array
-    = f.input :amenities_community, collection: option_array
-    = f.input :amenities_floorplan, collection: option_array
-    = f.input :pet_dog, collection: option_array
-    = f.input :pet_cat, collection: option_array
-  .form-actions
-    = f.button :submit
+    = field_path_mapping_select_tag(f, :marketing_name) 
+    = field_path_mapping_select_tag(f, :description) 
+    = field_path_mapping_select_tag(f, :website) 
+    = field_path_mapping_select_tag(f, :contact_phone) 
+    = field_path_mapping_select_tag(f, :contact_email) 
+    = field_path_mapping_select_tag(f, :location_street) 
+    = field_path_mapping_select_tag(f, :location_city) 
+    = field_path_mapping_select_tag(f, :location_state) 
+    = field_path_mapping_select_tag(f, :location_zip) 
+    = field_path_mapping_select_tag(f, :location_latiitude) 
+    = field_path_mapping_select_tag(f, :location_longitude) 
+    = field_path_mapping_select_tag(f, :floorplan_name) 
+    = field_path_mapping_select_tag(f, :floorplan_square_feet) 
+    = field_path_mapping_select_tag(f, :floorplan_market_rent) 
+    = field_path_mapping_select_tag(f, :floorplan_effective_rent) 
+    = field_path_mapping_select_tag(f, :floorplan_bedrooms) 
+    = field_path_mapping_select_tag(f, :floorplan_bathrooms) 
+    = field_path_mapping_select_tag(f, :floorplan_availability) 
+    = field_path_mapping_select_tag(f, :file_floorplan) 
+    = field_path_mapping_select_tag(f, :file_property) 
+    = field_path_mapping_select_tag(f, :amenities_community) 
+    = field_path_mapping_select_tag(f, :amenities_floorplan) 
+    = field_path_mapping_select_tag(f, :pet_dog) 
+    = field_path_mapping_select_tag(f, :pet_cat) 
+  
+  javascript:
+    $('form.edit_field_path_mapping select').on('change', function() {
+      $('form.edit_field_path_mapping').submit();
+    });

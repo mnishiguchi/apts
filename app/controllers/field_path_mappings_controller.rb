@@ -1,12 +1,6 @@
 class FieldPathMappingsController < ApplicationController
   before_action :set_field_path_mapping, only: [:show, :edit, :update]
 
-  # GET /field_path_mappings
-  def index
-    # http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations
-    @field_path_mappings = FieldPathMapping.includes(:feed_source).all
-  end
-
   # GET /field_path_mappings/1
   def show
   end
@@ -18,8 +12,8 @@ class FieldPathMappingsController < ApplicationController
   # PATCH/PUT /field_path_mappings/1
   def update
     if @field_path_mapping.update(field_path_mapping_params)
-      flash[:success] = 'Field path mapping was successfully updated.'
-      redirect_to @field_path_mapping
+        flash[:success] = 'Field path mapping was successfully updated.'
+        redirect_to edit_field_path_mapping_path
     else
       render :edit
     end
@@ -34,8 +28,7 @@ class FieldPathMappingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def field_path_mapping_params
       permit = [
-        :location_address_1,
-        :location_address_2,
+        :location_street,
         :location_city,
         :location_state,
         :location_zip,

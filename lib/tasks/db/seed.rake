@@ -6,7 +6,8 @@ namespace :db do
       "db:migrate:reset",
       "db:seed_users",
       "db:seed_feed_sources",
-      "db:import_feeds"
+      "db:import_feeds",
+      "db:seed_field_path_mappings",
     ]
   end
 end

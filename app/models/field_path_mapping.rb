@@ -34,6 +34,8 @@
 #
 
 class FieldPathMapping < ApplicationRecord
+  attr_accessor :scroll
+
   # http://apidock.com/rails/ActiveRecord/Persistence/touch
   belongs_to :feed_source, touch: true
 

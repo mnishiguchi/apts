@@ -26,9 +26,16 @@
     = field_path_mapping_select_tag(f, :amenities_community) 
     = field_path_mapping_select_tag(f, :amenities_floorplan) 
     = field_path_mapping_select_tag(f, :pet_dog) 
-    = field_path_mapping_select_tag(f, :pet_cat) 
+    = field_path_mapping_select_tag(f, :pet_cat)
+    
+    = f.input :scroll, as: :hidden, input_html: { :value => "0" }
   
   javascript:
     $('form.edit_field_path_mapping select').on('change', function() {
-      $('form.edit_field_path_mapping').submit();
+        setCurrentScrollPosition();
+        $('form.edit_field_path_mapping').submit();
     });
+
+    function setCurrentScrollPosition() {
+        $('.field_path_mapping_scroll input').val($(window).scrollTop());
+    }

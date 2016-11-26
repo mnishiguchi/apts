@@ -6,3 +6,9 @@
   = link_to 'Finish editing', @field_path_mapping
 = render "tabs"
 = render 'form'
+
+javascript:
+  // Restore the scroll position before form submission.
+  $(document).on('turbolinks:load', function() {
+      $('body').scrollTop("#{@scroll}", 400);
+  })

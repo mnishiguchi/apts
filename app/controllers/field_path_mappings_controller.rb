@@ -7,13 +7,14 @@ class FieldPathMappingsController < ApplicationController
 
   # GET /field_path_mappings/1/edit
   def edit
+    @scroll = params[:scroll]
   end
 
   # PATCH/PUT /field_path_mappings/1
   def update
     if @field_path_mapping.update(field_path_mapping_params)
         flash[:success] = 'Field path mapping was successfully updated.'
-        redirect_to edit_field_path_mapping_path
+        redirect_to edit_field_path_mapping_path(scroll: params[:field_path_mapping][:scroll])
     else
       render :edit
     end
@@ -27,32 +28,8 @@ class FieldPathMappingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def field_path_mapping_params
-      permit = [
-        :location_street,
-        :location_city,
-        :location_state,
-        :location_zip,
-        :location_latiitude,
-        :location_longitude,
-        :marketing_name,
-        :contact_phone,
-        :contact_email,
-        :website,
-        :description,
-        :floorplan_name,
-        :floorplan_square_feed,
-        :floorplan_market_rent,
-        :floorplan_effective_rent,
-        :floorplan_bedroops,
-        :floorplan_bathrooms,
-        :floorplan_availability,
-        :file_floorplan,
-        :file_property,
-        :amenities_community,
-        :amenities_floorplan,
-        :pet_dog,
-        :pet_cat,
-      ]
+      permit = @field_path_mapping.field_attributes.keys
+      permit << :scroll
       params.require(:field_path_mapping).permit(*permit)
     end
 end

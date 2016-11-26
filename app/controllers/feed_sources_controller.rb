@@ -7,7 +7,12 @@ class FeedSourcesController < ApplicationController
   end
 
   # GET /feed_sources/1
+  # GET /feed_sources/1.csv
   def show
+    respond_to do |format|
+      format.html
+      format.csv { SendFeedSourceCsv.new(@feed_source, self) }
+    end
   end
 
   private

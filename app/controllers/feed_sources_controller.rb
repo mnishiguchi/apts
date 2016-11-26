@@ -13,7 +13,7 @@ class FeedSourcesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feed_source
-      @feed_source = FeedSource.find(params[:id])
+      @feed_source = FeedSource.includes(:field_path_mapping).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

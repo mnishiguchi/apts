@@ -25,6 +25,7 @@ class CreateFieldPathMappings < ActiveRecord::Migration[5.0]
       t.string :amenities_floorplan
       t.string :pet_dog
       t.string :pet_cat
+      t.json :example_data
       t.references :feed_source, foreign_key: true
 
       t.timestamps

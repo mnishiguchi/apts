@@ -27,6 +27,7 @@
 #  amenities_floorplan      :string
 #  pet_dog                  :string
 #  pet_cat                  :string
+#  example_data             :json
 #  feed_source_id           :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

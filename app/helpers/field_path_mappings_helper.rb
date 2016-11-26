@@ -5,18 +5,21 @@ module FieldPathMappingsHelper
   # NOTE: Although xpaths are saved in database, we use css-paths here because
   # css-paths are easier on the eyes.
   def field_path_mapping_select_tag(f, name)
-    option_array = @field_path_mapping.feed_source.xpaths.map do |xpath|
-      # Convert xpaths into css-paths.
-      xpath.gsub("[]", "").gsub("/", " ")
-    end.select(&:presence)
+    example_data = @field_path_mapping.example_data_for_field(name)
 
-    selected_xpath = @field_path_mapping.send(name).gsub("/", " ")
-    hint = @field_path_mapping.example_data_for_xpath(selected_xpath)
-
-    f.input name, collection: option_array,
-                  selected:   selected_xpath,
-                  hint:       hint,
+    f.input name, collection: @field_path_mapping.all_css_paths,
+                  selected:   @field_path_mapping.css_path(name),
+                  hint:       pretty_json(example_data),
                   include_blank: "(select if none)"
+  end
 
+  def pretty_example_json(xpath)
+    example_data = @field_path_mapping.example_data_for_xpath(xpath)
+    pretty_json(example_data)
+  end
+
+  def pretty_json(xml)
+    return "" if xml.blank?
+    JSON.pretty_generate(Hash.from_xml(xml))
   end
 end

@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20161125180006) do
     t.string   "amenities_floorplan"
     t.string   "pet_dog"
     t.string   "pet_cat"
+    t.json     "example_data"
     t.integer  "feed_source_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false

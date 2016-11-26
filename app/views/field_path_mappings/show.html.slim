@@ -1,21 +1,16 @@
 = provide(:title, @field_path_mapping.class.name.titleize)
 
-h1.page-header 
-  = @field_path_mapping.class.name.titleize
-  .h4
-    | Source url: 
-    span.text-muted
-      = @field_path_mapping.feed_source.url
-    span.pull-right
-      = link_to 'Edit', edit_field_path_mapping_path(@field_path_mapping)
+= render "page_header"
 
-- except = ["id", "created_at", "updated_at", "feed_source_id"]
-- @field_path_mapping.attributes.except(*except).each do |field, xpath|
-  .well
-    .h4
-      = field.titleize
-    pre
-      = xpath
-    pre
-      = @field_path_mapping.example_data_for_xpath(xpath)
-        
+.pull-right
+  = link_to 'Edit field-path mapping', edit_field_path_mapping_path(@field_path_mapping)
+= render "tabs"
+
+- @field_path_mapping.field_attributes.each do |field, xpath|
+  p
+    strong= field.humanize
+    br
+    = xpath
+  pre
+    = pretty_example_json(xpath)
+  br

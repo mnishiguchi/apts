@@ -10,14 +10,14 @@
       
     - else
       a.nav-item.pull-left[href="#{feed_sources_path}"] 
-        | Feed sources
+        | All feed sources
       
       a.nav-item.pull-right[
-        data-target="#signup_modal__target" 
+        data-target="#signup_modal" 
         data-toggle="modal" 
         type="button"
       ] Sign up
-      #signup_modal__target.modal.fade[
+      #signup_modal.modal.fade[
         aria-labelledby="signup_modal__label" 
         role="dialog" 
         tabindex="-1"
@@ -25,11 +25,11 @@
         = render "shared/signup_modal"
       
       a.nav-item.pull-right[
-        data-target="#login_modal__target" 
+        data-target="#login_modal" 
         data-toggle="modal" 
         type="button"
       ] Log in
-      #login_modal__target.modal.fade[
+      #login_modal.modal.fade[
         aria-labelledby="login_modal__label" 
         role="dialog" 
         tabindex="-1"

@@ -15,10 +15,10 @@ main {
 }
 
 .flash_message.alert {
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // z-index: 1001;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999;
   width: 100vw;
   margin-bottom: 0;
   opacity: .95;
@@ -41,9 +41,9 @@ main {
 }
 
 
-// ===
+// ---
 // site header
-// ===
+// ---
 
 
 .site_header {
@@ -130,9 +130,9 @@ main {
 
 
 
-// ===
+// ---
 // site footer
-// ===
+// ---
 
 
 footer {

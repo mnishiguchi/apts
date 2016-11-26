@@ -21,19 +21,35 @@
     = field_path_mapping_select_tag(f, :floorplan_bedrooms) 
     = field_path_mapping_select_tag(f, :floorplan_bathrooms) 
     = field_path_mapping_select_tag(f, :floorplan_availability) 
-    = field_path_mapping_select_tag(f, :file_floorplan) 
     = field_path_mapping_select_tag(f, :file_property) 
+    = field_path_mapping_select_tag(f, :file_floorplan) 
     = field_path_mapping_select_tag(f, :amenities_community) 
     = field_path_mapping_select_tag(f, :amenities_floorplan) 
     = field_path_mapping_select_tag(f, :pet_dog) 
     = field_path_mapping_select_tag(f, :pet_cat)
     
     = f.input :scroll, as: :hidden, input_html: { :value => "0" }
+    
+    = f.button :submit, 'Update field-path mapping'
+  
+  css:
+    input[type="submit"] {
+      position: fixed;
+      top: 5px;
+      right: 1%;
+      opacity: 0.8;
+      display: none;
+    }
   
   javascript:
-    $('form.edit_field_path_mapping select').on('change', function() {
+    // Show the submit button when user changes any select box.
+    $('select').on('change', function() {
+        $('input[type="submit"]').css("display", "block");
+    });
+    
+    // Set the scroll position before submitting the form.
+    $('form').on('submit', function() {
         setCurrentScrollPosition();
-        $('form.edit_field_path_mapping').submit();
     });
 
     function setCurrentScrollPosition() {

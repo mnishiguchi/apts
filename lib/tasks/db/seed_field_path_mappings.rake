@@ -2,9 +2,7 @@ namespace :db do
   desc "Create fake field-path mappings in database"
   task :seed_field_path_mappings => :environment do
 
-    url = "http://www.example.com/feed-source-1"
-    puts "Updating FieldPathMapping for #{url}"
-    FeedSource.for_url(url).field_path_mapping.update_attributes(
+    update_field_path_mapping("http://www.example.com/feed-source-1",
       :marketing_name           => "/PhysicalProperty/Property/Identification/MarketingName",
       :description              => "/PhysicalProperty/Property/Identification/WebSite",
       :website                  => "/PhysicalProperty/Property/Information/LongDescription",
@@ -31,4 +29,9 @@ namespace :db do
       :pet_cat                  => "/PhysicalProperty/Property/Policy/Pet",
     )
   end
+end
+
+def update_field_path_mapping(url, attributes)
+  puts "Updating FieldPathMapping for #{url}"
+  FeedSource.for_url(url).field_path_mapping.update_attributes(attributes)
 end

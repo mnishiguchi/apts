@@ -1,8 +1,13 @@
 # Restoring scroll position
 
+## Scenario
+- Form automatically submits when any value changes.
+- After submission, it redirects back to the edit view.
+- We want to restore the scroll position.
+
 ## Model
 
-- Add a virtual field for the scroll position.
+Add a virtual field for the scroll position.
 
 ```rb
 class FieldPathMapping < ApplicationRecord
@@ -35,7 +40,7 @@ class FieldPathMapping < ApplicationRecord
 
 ## Controller
 
-- Add the scroll field to the whitelist of the strong parameter.
+Add the scroll field to the whitelist of the strong parameter.
 
 ```rb
 # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,26 +1,29 @@
-require 'open-uri'
 require 'nokogiri'
 
 namespace :feeds do
   desc "Get xpaths from xml files in `db/files/`"
-  task :get_xpaths_from_xml_files do
+  task get_xpaths_from_xml_files: :environment do
 
-    # Get file paths.
-    file_paths = Dir.glob(Rails.root.join("db", "files", "*.xml"))
+    # Get all the source files.
+    source_dir   = Rails.root.join("db", "files").to_s
+    source_files = Dir.glob("#{source_dir}/*.xml")
 
-    # Read xml files and parse them using Nokogiri.
-    # http://www.nokogiri.org/tutorials/parsing_an_html_xml_document.html#from_a_file
-    parsed_xml_documents = file_paths.map do |file_path|
-      Nokogiri::XML(File.open(file_path))
+    output_dir = Rails.root.join("db", "files", "xpaths").to_s
+
+    source_files.each_with_index do |source_file, i|
+      puts "Processing #{source_file}"
+      file = source_file.sub(source_dir, output_dir).gsub('.xml', '.rb')
+      data = all_xpaths(parse_xml(source_file)).join("\n")
+      File.write(file, data)
     end
-
-    # For each document, get all the xpaths and ouput them to a file.
-    parsed_xml_documents.each_with_index do |parsed_doc, i|
-      file_path = Rails.root.join("db", "files", "xpath_#{i}.rb")
-      xpaths    = all_xpaths(parsed_doc).join("\n")
-      File.write(file_path, xpaths)
-    end
+    puts "Done"
   end
+end
+
+def parse_xml(xml_file)
+  # Read xml files and parse them using Nokogiri.
+  # http://www.nokogiri.org/tutorials/parsing_an_html_xml_document.html#from_a_file
+  Nokogiri::XML(File.open(xml_file))
 end
 
 # Generates an array of all the xpath from a Nokogiri-parsed document.

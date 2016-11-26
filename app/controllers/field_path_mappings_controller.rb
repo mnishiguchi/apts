@@ -13,8 +13,9 @@ class FieldPathMappingsController < ApplicationController
   # PATCH/PUT /field_path_mappings/1
   def update
     if @field_path_mapping.update(field_path_mapping_params)
-        flash[:success] = 'Field path mapping was successfully updated.'
-        redirect_to edit_field_path_mapping_path(scroll: params[:field_path_mapping][:scroll])
+      flash[:success] = 'Field path mapping was successfully updated.'
+      scroll = params[:field_path_mapping][:scroll]
+      redirect_to edit_field_path_mapping_path(scroll: scroll)
     else
       render :edit
     end

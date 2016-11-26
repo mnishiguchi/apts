@@ -54,7 +54,7 @@ class FieldPathMapping < ApplicationRecord
   end
 
   def all_css_paths
-    @css_paths ||= self.all_xpaths.map { |xpath| xpath.gsub("[]", "").gsub("/", " ") }
+    @css_paths ||= self.all_xpaths.map { |xpath| xpath.gsub("[]", "").gsub("/", " ") }.uniq
   end
 
   def field_attributes

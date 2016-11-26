@@ -2,36 +2,22 @@ namespace :db do
   desc "Create fake field-path mappings in database"
   task :seed_field_path_mappings => :environment do
 
-    update_field_path_mapping("http://www.example.com/feed-source-1",
-      :marketing_name           => "/PhysicalProperty/Property/Identification/MarketingName",
-      :description              => "/PhysicalProperty/Property/Identification/WebSite",
-      :website                  => "/PhysicalProperty/Property/Information/LongDescription",
-      :contact_phone            => "/PhysicalProperty/Property/Identification/Phone/Number",
-      :contact_email            => "/PhysicalProperty/Property/Identification/Email",
-      :location_street          => "/PhysicalProperty/Property/Identification/Address/Address1",
-      :location_city            => "/PhysicalProperty/Property/Identification/Address/City",
-      :location_state           => "/PhysicalProperty/Property/Identification/Address/State",
-      :location_zip             => "/PhysicalProperty/Property/Identification/Address/Zip",
-      :location_latiitude       => "/PhysicalProperty/Property/Identification/Latitude",
-      :location_longitude       => "/PhysicalProperty/Property/Identification/Longitude",
-      :floorplan_name           => "/PhysicalProperty/Property/Floorplan/Name",
-      :floorplan_square_feet    => "/PhysicalProperty/Property/Floorplan/SquareFeet",
-      :floorplan_market_rent    => "/PhysicalProperty/Property/Floorplan/MarketRent",
-      :floorplan_effective_rent => "",
-      :floorplan_bedrooms       => "/PhysicalProperty/Property/Floorplan/Room",
-      :floorplan_bathrooms      => "/PhysicalProperty/Property/Floorplan/Room",
-      :floorplan_availability   => "",
-      :file_floorplan           => "",
-      :file_property            => "/PhysicalProperty/Property/File",
-      :amenities_community      => "/PhysicalProperty/Property/Amenities/Community",
-      :amenities_floorplan      => "/PhysicalProperty/Property/Amenities/Floorplan",
-      :pet_dog                  => "/PhysicalProperty/Property/Policy/Pet",
-      :pet_cat                  => "/PhysicalProperty/Property/Policy/Pet",
-    )
-  end
-end
+    # Get all the source files.
+    source_dir   = Rails.root.join("db", "files", "field_path_mappings").to_s
+    source_files = Dir.glob("#{source_dir}/*.yaml")
 
-def update_field_path_mapping(url, attributes)
-  puts "Updating FieldPathMapping for #{url}"
-  FeedSource.for_url(url).field_path_mapping.update_attributes(attributes)
+    FieldPathMapping.all.each do |mapping|
+      url = mapping.feed_source.url
+      puts "Seeding field-path mapping data for #{url}"
+
+      # Find a file that matches the feed source url.
+      source_file = source_files.select { |f| f =~ /#{url.gsub('/', '-')}/ }[0]
+
+      # If the file was found, read that file and update the field_path_mapping.
+      if source_file
+        attributes = YAML.load_file(source_file)
+        FeedSource.for_url(url).field_path_mapping.update_attributes(attributes)
+      end
+    end
+  end
 end

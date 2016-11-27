@@ -36,8 +36,7 @@
 class FieldPathMapping < ApplicationRecord
   attr_accessor :scroll
 
-  # http://apidock.com/rails/ActiveRecord/Persistence/touch
-  belongs_to :feed_source, touch: true
+  belongs_to :feed_source
 
   before_update :set_example_data_for_xpath
 

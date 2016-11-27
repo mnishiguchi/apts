@@ -91,9 +91,9 @@ ActiveRecord::Schema.define(version: 20161125180006) do
 
   create_table "floorplans", force: :cascade do |t|
     t.string   "name"
-    t.integer  "square_feet"
-    t.integer  "market_rent"
-    t.integer  "effective_rent"
+    t.json     "square_feet"
+    t.json     "market_rent"
+    t.json     "effective_rent"
     t.integer  "bedrooms"
     t.integer  "bathrooms"
     t.integer  "availability"

@@ -22,7 +22,12 @@ class Feed < ApplicationRecord
   def create_properties
     property_xml_docs.each do |property_xml_doc|
 
-      property_attributes = property_attributes(property_xml_doc)
+      # Prepare attributes for property with field-path mapping and xml doc.
+      property_attributes = PropertyAttributes.new(
+                              self.field_path_mapping.for_property,
+                              property_xml_doc
+                            ).attributes
+
       next if property_attributes.blank?
       next if property_attributes.fetch("marketing_name", nil).blank?
 
@@ -37,38 +42,19 @@ class Feed < ApplicationRecord
 
     floorplan_xml_docs.each do |floorplan_xml_doc|
 
-      # TODO: Floorplan parser
-      #
-      attributes = floorplan_attributes(floorplan_xml_doc)
+      # Prepare attributes for floorplan with field-path mapping and xml doc.
+      floorplan_attributes = FloorplanAttributes.new(
+                                self.field_path_mapping.for_floorplan,
+                                floorplan_xml_doc
+                              ).attributes
 
+      next if floorplan_attributes.blank?
 
-      ap attributes
+      # Debug
+      ap floorplan_attributes
 
-
-      property.floorplans.create!(attributes)
+      property.floorplans.create!(floorplan_attributes)
     end
-  end
-
-  private def property_attributes(property_xml_doc)
-    property_attributes = {}
-
-    self.field_path_mapping.for_property.each do |field, css|
-      next if css.blank?
-      property_attributes[field] = property_xml_doc.at_css(css)&.text
-    end
-
-    property_attributes
-  end
-
-  private def floorplan_attributes(floorplan_xml_doc)
-    floorplan_attributes = {}
-
-    self.field_path_mapping.for_floorplan.each do |field, css|
-      next if css.blank?
-      floorplan_attributes[field] = floorplan_xml_doc.at_css(css)&.text
-    end
-
-    floorplan_attributes
   end
 
   # Returns an array of nokogiri properties.

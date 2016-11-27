@@ -4,11 +4,11 @@ namespace :feeds do
   desc "Convert xml files to ruby`"
   task convert_xml_to_rb: :environment do
 
-    # Get all the source files.
-    source_dir   = Rails.root.join("db", "files").to_s
+    # Get all the example feeds.
+    source_dir   = Rails.root.join("db", "files", "feeds").to_s
     source_files = Dir.glob("#{source_dir}/*.xml")
 
-    output_dir = Rails.root.join("db", "files", "rb").to_s
+    output_dir = Rails.root.join("db/files/feeds_processed", "rb").to_s
 
     source_files.each do |source_file|
       puts "Processing #{source_file}"
@@ -17,6 +17,7 @@ namespace :feeds do
       file = source_file.sub(source_dir, output_dir).gsub('.xml', '.rb')
       File.write(file, hash)
     end
+    
     puts "Done"
   end
 end

@@ -8,6 +8,7 @@ class CreateFloorplans < ActiveRecord::Migration[5.0]
       t.integer :bedrooms
       t.integer :bathrooms
       t.integer :availability
+      t.references :property, index: true
 
       t.timestamps
     end

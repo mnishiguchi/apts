@@ -4,11 +4,11 @@ namespace :feeds do
   desc "Get xpaths from xml files in `db/files/`"
   task get_xpaths_from_xml_files: :environment do
 
-    # Get all the source files.
-    source_dir   = Rails.root.join("db", "files").to_s
+    # Get all the example feeds.
+    source_dir   = Rails.root.join("db/files/feeds").to_s
     source_files = Dir.glob("#{source_dir}/*.xml")
 
-    output_dir = Rails.root.join("db", "files", "xpaths").to_s
+    output_dir = Rails.root.join("db/files/feeds_processed", "xpaths").to_s
 
     source_files.each_with_index do |source_file, i|
       puts "Processing #{source_file}"
@@ -16,6 +16,7 @@ namespace :feeds do
       data = all_xpaths(parse_xml(source_file)).join("\n")
       File.write(file, data)
     end
+
     puts "Done"
   end
 end

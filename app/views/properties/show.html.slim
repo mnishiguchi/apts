@@ -1,51 +1,71 @@
-p#notice = notice
+= provide(:title, @property.marketing_name)
 
-p
-  strong Marketing name:
+h1.page-header
   = @property.marketing_name
-p
-  strong Website:
-  = @property.website
-p
-  strong Description:
+p.text-muted
   = @property.description
-p
-  strong Contact email:
-  = @property.contact_email
-p
-  strong Contact phone:
-  = @property.contact_phone
-p
-  strong Location street:
-  = @property.location_street
-p
-  strong Location city:
-  = @property.location_city
-p
-  strong Location state:
-  = @property.location_state
-p
-  strong Location zip:
-  = @property.location_zip
-p
-  strong Location latitude:
-  = @property.location_latitude
-p
-  strong Location longitude:
-  = @property.location_longitude
-p
-  strong Pet dog:
-  = @property.pet_dog
-p
-  strong Pet cat:
-  = @property.pet_cat
-p
-  strong Floorplan:
-  = @property.floorplan
-p
-  strong Amenity:
-  = @property.amenity
 
-= link_to 'Edit', edit_property_path(@property)
-'|
+.table-responsive
+  table.table.table-bordered
+    thead
+      tr
+        th Field
+        th Value
+    tbody
+      tr
+        td 
+          strong Website:
+        td= @property.website
+      tr
+        td 
+          strong Contact email:
+        td= @property.contact_email
+      tr
+        td 
+          strong Contact phone:
+        td= @property.contact_phone
+      tr
+        td 
+          strong Marketing name:
+      tdtr
+        td 
+          strong Location street:
+        td= @property.location_street
+      tr
+        td 
+          strong Location city:
+        td= @property.location_city
+      tr
+        td 
+          strong Location state:
+        td= @property.location_state
+      tr
+        td 
+          strong Location zip:
+        td= @property.location_zip
+      tr
+        td 
+          strong Location latitude:
+        td= @property.location_latitude
+      tr
+        td 
+          strong Location longitude:
+        td= @property.location_longitude
+      tr
+        td 
+          strong Pet dog:
+        td= @property.pet_dog
+      tr
+        td 
+          strong Pet cat:
+        td= @property.pet_cat
+      tr
+        td 
+          strong Floorplans:
+        td= @property.floorplans.map(&:id).join(',')
+      tr
+        td 
+          strong Property amenities:
+        td= @property.property_amenities.map(&:id).join(',')
+
 = link_to 'Back', properties_path

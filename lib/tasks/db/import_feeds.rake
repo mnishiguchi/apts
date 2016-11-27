@@ -8,7 +8,7 @@ namespace :db do
     WebMock.enable!
 
     # Get file paths.
-    file_paths = Dir.glob(Rails.root.join("db", "files", "*.xml"))
+    file_paths = Dir.glob(Rails.root.join("db/files/feeds", "*.xml"))
 
     # Associate those file paths with fake urls.
     file_paths.each_with_index do |file_path, i|

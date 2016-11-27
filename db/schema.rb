@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20161125180006) do
     t.string   "location_city"
     t.string   "location_state"
     t.string   "location_zip"
-    t.string   "location_latiitude"
+    t.string   "location_latitude"
     t.string   "location_longitude"
     t.string   "floorplan_name"
     t.string   "floorplan_square_feet"
@@ -97,8 +97,10 @@ ActiveRecord::Schema.define(version: 20161125180006) do
     t.integer  "bedrooms"
     t.integer  "bathrooms"
     t.integer  "availability"
+    t.integer  "property_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["property_id"], name: "index_floorplans_on_property_id", using: :btree
   end
 
   create_table "identities", force: :cascade do |t|

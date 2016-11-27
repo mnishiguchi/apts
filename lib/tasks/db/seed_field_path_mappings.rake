@@ -2,8 +2,8 @@ namespace :db do
   desc "Create fake field-path mappings in database"
   task :seed_field_path_mappings => :environment do
 
-    # Get all the source files.
-    source_dir   = Rails.root.join("db", "files", "field_path_mappings").to_s
+    # Get all the `field_path_mappings` files.
+    source_dir = Rails.root.join("db/files/feeds_processed", "field_path_mappings").to_s
     source_files = Dir.glob("#{source_dir}/*.yaml")
 
     FieldPathMapping.all.each do |mapping|

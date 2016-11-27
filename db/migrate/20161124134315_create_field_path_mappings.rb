@@ -10,7 +10,7 @@ class CreateFieldPathMappings < ActiveRecord::Migration[5.0]
       t.string :location_city
       t.string :location_state
       t.string :location_zip
-      t.string :location_latiitude
+      t.string :location_latitude
       t.string :location_longitude
       t.string :floorplan_name
       t.string :floorplan_square_feet

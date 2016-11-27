@@ -54,9 +54,10 @@ class FieldPathMapping < ApplicationRecord
   end
 
   def all_css_paths
-    @css_paths ||= self.all_xpaths.map { |xpath| xpath.gsub("[]", "").gsub("/", " ") }.uniq
+    @css_paths ||= self.all_xpaths.map { |xpath| xpath.gsub("[]", "").gsub("/", " ") }.compact.uniq
   end
 
+  # Returns a hash of field to css absolute path.
   def field_attributes
     except = [
       "id",
@@ -65,7 +66,27 @@ class FieldPathMapping < ApplicationRecord
       "updated_at",
       "example_data"
     ]
-    attributes.except(*except)
+    @field_attributes ||= attributes.except(*except)
+  end
+
+  # Returns a hash of field to css path relative to `Property`.
+  def field_attributes_for_property
+    # Cast the resulting hash.
+    slice = Property.column_names - ["id", "feed_id", "created_at", "updated_at"]
+
+    Hash[
+      field_attributes.map do |field, css|
+        if css.present?
+          [ field, FieldPathMapping.css_path_relative_to_property(css) ]
+        else
+          [ field, "" ]
+        end
+      end
+    ].slice(*slice)
+  end
+
+  def self.css_path_relative_to_property(css)
+    css.gsub("PhysicalProperty Property", "")
   end
 
   def example_data_for_field(field)

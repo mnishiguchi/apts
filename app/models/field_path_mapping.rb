@@ -77,25 +77,25 @@ class FieldPathMapping < ApplicationRecord
       field_attributes.map do |field, css|
         if css.present?
           [ field, FieldPathMapping.css_path_relative_to_property(css) ]
-        else
-          [ field, "" ]
         end
-      end
+      end.compact
     ].slice(*slice)
   end
 
   # Returns a hash of field to css path relative to `Floorplan`.
   def for_floorplan
-    # Cast the resulting hash.
-    slice = Floorplan.column_names - ["id", "property_id", "created_at", "updated_at"]
+    hash = {}
 
-    Hash[
-      field_attributes.map do |field, css|
-        if css.present?
-          [ field, FieldPathMapping.css_path_relative_to_floorplan(css) ]
-        end
+    field_attributes.each do |field, css|
+      next unless field =~ /floorplan_/
+      if css.present?
+        key   = field.sub("floorplan_", "")
+        value = FieldPathMapping.css_path_relative_to_floorplan(css)
+        hash[key] = value
       end
-    ].slice(*slice)
+    end
+
+    hash
   end
 
   def self.css_path_relative_to_property(css)
@@ -103,7 +103,8 @@ class FieldPathMapping < ApplicationRecord
   end
 
   def self.css_path_relative_to_floorplan(css)
-    css.gsub("PhysicalProperty Property", "")
+    return "" unless css =~ /PhysicalProperty Property Floorplan/
+    css.gsub("PhysicalProperty Property Floorplan", "")
   end
 
   def example_data_for_field(field)

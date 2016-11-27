@@ -35,17 +35,18 @@ class Feed < ApplicationRecord
 
     property = self.properties.create!(property_attributes)
 
+    floorplan_xml_docs.each do |floorplan_xml_doc|
 
-    # TODO
+      # TODO: Floorplan parser
+      #
+      attributes = floorplan_attributes(floorplan_xml_doc)
 
-    # floorplan_xml_docs.each do |floorplan_xml_doc|
-    #
-    #
-    #   binding.pry
-    #
-    #
-    #   create_floorplans_for_property(property, floorplan_xml_doc)
-    # end
+
+      ap attributes
+
+
+      property.floorplans.create!(attributes)
+    end
   end
 
   private def property_attributes(property_xml_doc)
@@ -59,15 +60,15 @@ class Feed < ApplicationRecord
     property_attributes
   end
 
-  private def create_floorplans_for_property(property, floorplan_xml_doc)
-    floorplan_attributes ={}
+  private def floorplan_attributes(floorplan_xml_doc)
+    floorplan_attributes = {}
 
     self.field_path_mapping.for_floorplan.each do |field, css|
       next if css.blank?
       floorplan_attributes[field] = floorplan_xml_doc.at_css(css)&.text
     end
 
-    property.floorplans.create!(floorplan_attributes)
+    floorplan_attributes
   end
 
   # Returns an array of nokogiri properties.

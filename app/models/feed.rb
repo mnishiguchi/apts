@@ -51,7 +51,7 @@ class Feed < ApplicationRecord
       next if floorplan_attributes.blank?
 
       # Debug
-      ap floorplan_attributes
+      # ap floorplan_attributes
 
       property.floorplans.create!(floorplan_attributes)
     end

@@ -1,25 +1,19 @@
 class PropertiesController < ApplicationController
-  before_action :set_property, only: [:show, :edit, :update, :destroy]
+  before_action :set_property, only: [:show]
 
   # GET /properties
   # GET /properties.json
   def index
     @properties = Property.all
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @properties }
+    end
   end
 
   # GET /properties/1
   # GET /properties/1.json
   def show
-  end
-
-  # DELETE /properties/1
-  # DELETE /properties/1.json
-  def destroy
-    @property.destroy
-    respond_to do |format|
-      format.html { redirect_to properties_url, notice: 'Property was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private

@@ -11,9 +11,45 @@ class PropertyAttributes
 
     @field_path_mapping.each do |field, css|
       next if css.blank?
-      property_attributes[field] = @xml_doc.at_css(css)&.text
+
+      if field == "pet_cat" || field == "pet_dog"
+        property_attributes[field] = send(field, css)
+      else
+        property_attributes[field] = @xml_doc.at_css(css)&.text
+      end
     end
 
     property_attributes
+  end
+
+
+  # ---
+  # Parsers corresponding to all the individual attribute names.
+  # + The method name must match the attribute name.
+  # + Takes in a css path.
+  # + Returns a value for the attribute.
+  # ---
+
+
+  def pet_cat(css)
+    pet(css, /cat/i)
+  end
+
+  def pet_dog(css)
+    pet(css, /dog/i)
+  end
+
+  def pet(css, pet_type_regex)
+    # 1. Check the text node.
+    text = @xml_doc.at(css)&.text
+    return text if text =~ pet_type_regex
+
+    # 2. Check the children.
+    hashes = @xml_doc.css(css).map { |node| node.to_h }
+    hashes.each do |hash|
+      return hash if hash.to_s =~ pet_type_regex
+    end
+
+    nil
   end
 end

@@ -4,9 +4,9 @@
 #
 #  id             :integer          not null, primary key
 #  name           :string
-#  square_feet    :integer
-#  market_rent    :integer
-#  effective_rent :integer
+#  square_feet    :json
+#  market_rent    :json
+#  effective_rent :json
 #  bedrooms       :integer
 #  bathrooms      :integer
 #  availability   :integer

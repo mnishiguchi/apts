@@ -12,8 +12,8 @@ class CreateProperties < ActiveRecord::Migration[5.0]
       t.string :zip
       t.float :latitude
       t.float :longitude
-      t.boolean :pet_dog
-      t.boolean :pet_cat
+      t.json :pet_dog
+      t.json :pet_cat
       t.references :feed, index: true
 
       t.timestamps

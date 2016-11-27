@@ -150,8 +150,8 @@ ActiveRecord::Schema.define(version: 20161125180006) do
     t.string   "zip"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "pet_dog"
-    t.boolean  "pet_cat"
+    t.json     "pet_dog"
+    t.json     "pet_cat"
     t.integer  "feed_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false

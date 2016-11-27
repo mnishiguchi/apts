@@ -14,8 +14,8 @@
 #  zip            :string
 #  latitude       :float
 #  longitude      :float
-#  pet_dog        :boolean
-#  pet_cat        :boolean
+#  pet_dog        :json
+#  pet_cat        :json
 #  feed_id        :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

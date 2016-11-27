@@ -26,30 +26,15 @@ p.text-muted
         td= @property.contact_phone
       tr
         td 
-          strong Marketing name:
-      tdtr
-        td 
-          strong Location street:
-        td= @property.street
+          strong Address:
+        td= @property.full_address
       tr
         td 
-          strong Location city:
-        td= @property.city
-      tr
-        td 
-          strong Location state:
-        td= @property.state
-      tr
-        td 
-          strong Location zip:
-        td= @property.zip
-      tr
-        td 
-          strong Location latitude:
+          strong latitude:
         td= @property.latitude
       tr
         td 
-          strong Location longitude:
+          strong longitude:
         td= @property.longitude
       tr
         td 
@@ -67,5 +52,9 @@ p.text-muted
         td 
           strong Property amenities:
         td= @property.property_amenities.map(&:id).join(',')
+      tr
+        td 
+          strong Feed source url:
+        td= @property.feed.feed_source.url
 
 = link_to 'Back', properties_path

@@ -8,19 +8,13 @@ h1.page-header
     thead
       tr
         th name
-        th street
-        th city
-        th state
-        th zip
+        th address
         th latitude
         th longitude
     tbody
       - @properties.each do |property|
         tr
           td = link_to property.marketing_name, property 
-          td = property.street
-          td = property.city
-          td = property.state
-          td = property.zip
+          td = property.full_address
           td = property.latitude
           td = property.longitude

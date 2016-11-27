@@ -25,10 +25,14 @@ class Property < ApplicationRecord
   strip_attributes
 
   has_one :feed_property, dependent: :destroy
-  has_one :feed, through: :feed_property
+  belongs_to :feed
 
   has_many :floorplans
 
   has_many :property_property_amenities, dependent: :destroy
   has_many :property_amenities, through: :property_property_amenities
+
+  def full_address
+    "#{street}, #{city}, #{state} #{zip}"
+  end
 end

@@ -8,6 +8,7 @@ namespace :db do
       feed.create_properties
     end
 
-    puts "Property.count: #{Property.count}"
+    puts "Property.count:  #{Property.count}"
+    puts "Floorplan.count: #{Floorplan.count}"
   end
 end

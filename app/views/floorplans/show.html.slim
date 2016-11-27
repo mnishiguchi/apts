@@ -1,8 +1,6 @@
-p#notice = notice
+h1.page-header
+  = @floorplan.name || "(Unnamed)"
 
-p
-  strong Name:
-  = @floorplan.name
 p
   strong Square feet:
   = @floorplan.square_feet
@@ -22,9 +20,6 @@ p
   strong Availability:
   = @floorplan.availability
 p
-  strong Amenity:
-  = @floorplan.amenity
-
-= link_to 'Edit', edit_floorplan_path(@floorplan)
-'|
+  strong Floorplan amenities:
+br
 = link_to 'Back', floorplans_path

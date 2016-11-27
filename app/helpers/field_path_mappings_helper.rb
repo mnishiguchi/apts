@@ -4,6 +4,7 @@ module FieldPathMappingsHelper
   # It finds and shows an example value of the selected xpath.
   # NOTE: Although xpaths are saved in database, we use css-paths here because
   # css-paths are easier on the eyes.
+  # https://github.com/plataformatec/simple_form#collections
   def field_path_mapping_select_tag(f, name)
     example_data = @field_path_mapping.example_data_for_field(name)
 

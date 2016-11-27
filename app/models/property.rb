@@ -22,6 +22,7 @@
 #
 
 class Property < ApplicationRecord
+  strip_attributes
 
   has_one :feed_property, dependent: :destroy
   has_one :feed, through: :feed_property

@@ -18,9 +18,9 @@ h1.page-header
       - @properties.each do |property|
         tr
           td = link_to property.marketing_name, property 
-          td = property.location_street
-          td = property.location_city
-          td = property.location_state
-          td = property.location_zip
-          td = property.location_latitude
-          td = property.location_longitude
+          td = property.street
+          td = property.city
+          td = property.state
+          td = property.zip
+          td = property.latitude
+          td = property.longitude

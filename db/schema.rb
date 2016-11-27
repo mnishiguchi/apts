@@ -48,12 +48,12 @@ ActiveRecord::Schema.define(version: 20161125180006) do
     t.string   "description"
     t.string   "contact_phone"
     t.string   "contact_email"
-    t.string   "location_street"
-    t.string   "location_city"
-    t.string   "location_state"
-    t.string   "location_zip"
-    t.string   "location_latitude"
-    t.string   "location_longitude"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "latitude"
+    t.string   "longitude"
     t.string   "floorplan_name"
     t.string   "floorplan_square_feet"
     t.string   "floorplan_market_rent"
@@ -144,17 +144,17 @@ ActiveRecord::Schema.define(version: 20161125180006) do
     t.text     "description"
     t.string   "contact_email"
     t.string   "contact_phone"
-    t.string   "location_street"
-    t.string   "location_city"
-    t.string   "location_state"
-    t.string   "location_zip"
-    t.float    "location_latitude"
-    t.float    "location_longitude"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.float    "latitude"
+    t.float    "longitude"
     t.boolean  "pet_dog"
     t.boolean  "pet_cat"
     t.integer  "feed_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["feed_id"], name: "index_properties_on_feed_id", using: :btree
   end
 

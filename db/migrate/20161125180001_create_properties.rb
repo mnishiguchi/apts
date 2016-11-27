@@ -6,12 +6,12 @@ class CreateProperties < ActiveRecord::Migration[5.0]
       t.text :description
       t.string :contact_email
       t.string :contact_phone
-      t.string :location_street
-      t.string :location_city
-      t.string :location_state
-      t.string :location_zip
-      t.float :location_latitude
-      t.float :location_longitude
+      t.string :street
+      t.string :city
+      t.string :state
+      t.string :zip
+      t.float :latitude
+      t.float :longitude
       t.boolean :pet_dog
       t.boolean :pet_cat
       t.references :feed, index: true

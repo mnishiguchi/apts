@@ -33,7 +33,32 @@ class PropertyAttributes
 
 
   private def amenities(css)
-    @xml_doc.css(css).map { |node| Hash.from_xml(node.to_s) }
+    # @xml_doc.css(css).map { |node| Hash.from_xml(node.to_s) }
+
+    # Amenity hashes
+    amenity_hashes = @xml_doc.css(css).map do |node|
+      Hash.from_xml(node.to_s)[css.strip]
+    end.compact
+
+    # Find values for the keys Community and Floorplan
+    community = {}
+    floorplan = {}
+    amenity_hashes.each do |amenity_hash|
+      community = amenity_hash&.fetch("Community") { nil }
+      floorplan = amenity_hash&.fetch("Floorplan") { nil }
+    end
+
+    if community.present? && floorplan.present?
+      {
+        community: community,
+        floorplan: floorplan,
+      }
+    elsif amenity_hashes&.map do |hash| hash.keys end.flatten
+      # TODO
+      {
+        hello: amenity_hashes
+      }
+    end
   end
 
   private def pet_cat(css)

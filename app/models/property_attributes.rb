@@ -1,6 +1,8 @@
 # We get information from an xml doc based on the feed's field-path mapping.
 class PropertyAttributes
 
+  TRUE_REGEX = /^(true|t|yes|y|1)$/i
+
   def initialize(property_field_path_mapping, property_xml_doc={})
     @field_path_mapping = property_field_path_mapping
     @xml_doc            = property_xml_doc
@@ -33,8 +35,6 @@ class PropertyAttributes
 
 
   private def amenities(css)
-    # @xml_doc.css(css).map { |node| Hash.from_xml(node.to_s) }
-
     # Amenity hashes
     amenity_hashes = @xml_doc.css(css).map do |node|
       Hash.from_xml(node.to_s)[css.strip]
@@ -49,16 +49,27 @@ class PropertyAttributes
     end
 
     if community.present? && floorplan.present?
-      {
-        community: community,
-        floorplan: floorplan,
-      }
-    elsif amenity_hashes&.map do |hash| hash.keys end.flatten
-      # TODO
-      {
-        hello: amenity_hashes
+      return {
+        community: true_keys_from_hash(community),
+        floorplan: true_keys_from_hash(floorplan),
       }
     end
+
+    keys = amenity_hashes&.map do |hash| hash.keys end.flatten
+    if keys.include?("Community")
+      community_hash = amenity_hashes.select { |k,v| k =~ /community/i }
+      true_keys_from_hash(community_hash)
+    end
+
+    if keys.include?("Floorplan")
+      floorplan_hash = amenity_hashes.select { |k,v| k =~ /floorplan/i }
+      true_keys_from_hash(floorplan_hash)
+    end
+  end
+
+  # Converts hash to an array of keys for `true` value.
+  private def true_keys_from_hash(hash)
+    hash&.map { |k,v| k if v =~ TRUE_REGEX }.flatten.compact
   end
 
   private def pet_cat(css)
@@ -72,7 +83,18 @@ class PropertyAttributes
   private def pet(css, pet_type_regex)
     # 1. Check the text node.
     text = @xml_doc.at(css)&.text
-    return text if text =~ pet_type_regex
+    if text =~ pet_type_regex
+      # http://www.w3schools.com/tags/ref_urlencode.asp
+      return text.split('\n')
+                 .select { |l| l =~ pet_type_regex }
+                 .first&.strip
+                 .gsub("\%20", " ")
+                 .gsub("\%2C", ",")
+                 .gsub("\%2E", ".")
+                 .split('.')
+                 .select { |l| l =~ pet_type_regex }
+                 .first&.strip
+    end
 
     # 2. Check the children.
     hashes = @xml_doc.css(css).map { |node| node.to_h }

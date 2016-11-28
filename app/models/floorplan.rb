@@ -18,8 +18,6 @@
 class Floorplan < ApplicationRecord
   belongs_to :property
 
-  has_many :floorplan_floorplan_amenities, dependent: :destroy
-  has_many :floorplan_amenities, through: :floorplan_floorplan_amenities
-
-  # TODO: enum: bedrooms, bathrooms, availability
+  # has_many :floorplan_floorplan_amenities, dependent: :destroy
+  # has_many :floorplan_amenities, through: :floorplan_floorplan_amenities
 end

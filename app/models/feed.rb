@@ -31,6 +31,9 @@ class Feed < ApplicationRecord
       next if property_attributes.blank?
       next if property_attributes.fetch("marketing_name", nil).blank?
 
+      # Debug
+      ap property_attributes
+
       floorplan_xml_docs = floorplan_xml_docs(property_xml_doc)
       create_property_with_floorplans(property_attributes, floorplan_xml_docs)
     end

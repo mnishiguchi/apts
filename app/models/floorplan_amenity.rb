@@ -8,6 +8,6 @@
 #  updated_at :datetime         not null
 #
 
-class FloorplanAmenity < ApplicationRecord
-  has_many :floorplan_floorplan_amenities
-end
+# class FloorplanAmenity < ApplicationRecord
+#   has_many :floorplan_floorplan_amenities
+# end

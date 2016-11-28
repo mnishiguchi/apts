@@ -9,9 +9,9 @@
 #  updated_at           :datetime         not null
 #
 
-class FloorplanFloorplanAmenity < ApplicationRecord
-  belongs_to :floorplan
-  belongs_to :floorplan_amenity
-
-  validates :name, presence: true, uniqueness: true
-end
+# class FloorplanFloorplanAmenity < ApplicationRecord
+#   belongs_to :floorplan
+#   belongs_to :floorplan_amenity
+#
+#   validates :name, presence: true, uniqueness: true
+# end

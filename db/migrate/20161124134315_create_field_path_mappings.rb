@@ -21,6 +21,7 @@ class CreateFieldPathMappings < ActiveRecord::Migration[5.0]
       t.string :floorplan_availability
       t.string :file_floorplan
       t.string :file_property
+      t.string :amenities
       t.string :amenities_community
       t.string :amenities_floorplan
       t.string :pet_dog

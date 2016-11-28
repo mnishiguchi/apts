@@ -16,6 +16,7 @@
 #  longitude      :float
 #  pet_dog        :json
 #  pet_cat        :json
+#  amenities      :json
 #  feed_id        :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -29,8 +30,8 @@ class Property < ApplicationRecord
 
   has_many :floorplans
 
-  has_many :property_property_amenities, dependent: :destroy
-  has_many :property_amenities, through: :property_property_amenities
+  # has_many :property_property_amenities, dependent: :destroy
+  # has_many :property_amenities, through: :property_property_amenities
 
   def full_address
     "#{street}, #{city}, #{state} #{zip}"

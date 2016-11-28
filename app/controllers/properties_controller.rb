@@ -19,7 +19,7 @@ class PropertiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property
-      @property = Property.includes(:feed, :floorplans, :property_amenities).find(params[:id])
+      @property = Property.includes(:feed, :floorplans).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -30,16 +30,16 @@ class PropertiesController < ApplicationController
         :description,
         :contact_email,
         :contact_phone,
-        :location_street,
-        :location_city,
-        :location_state,
-        :location_zip,
-        :location_latitude,
-        :location_longitude,
+        :street,
+        :city,
+        :state,
+        :zip,
+        :latitude,
+        :longitude,
         :pet_dog,
         :pet_cat,
+        :amenities,
         { floorplan_ids: [] },
-        { amenity_ids:   [] },
       )
     end
 end

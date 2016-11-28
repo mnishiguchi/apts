@@ -75,6 +75,10 @@ end
 javascript:
   // Restore the scroll position before form submission.
   $(document).on('turbolinks:load', function() {
-      $('body').scrollTop("#{@scroll}", 400);
+
+      // Make sure that we apply this effect only for this page.
+      if (location.pathname === '/field_path_mappings/1/edit') {
+          $('body').scrollTop("#{@scroll}", 0);
+      }
   })
 ```

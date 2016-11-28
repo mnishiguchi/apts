@@ -12,7 +12,8 @@ class PropertyAttributes
     @field_path_mapping.each do |field, css|
       next if css.blank?
 
-      if field == "pet_cat" || field == "pet_dog"
+      case field
+      when "pet_cat", "pet_dog", "amenities"
         property_attributes[field] = send(field, css)
       else
         property_attributes[field] = @xml_doc.at_css(css)&.text
@@ -31,15 +32,19 @@ class PropertyAttributes
   # ---
 
 
-  def pet_cat(css)
+  private def amenities(css)
+    @xml_doc.css(css).map { |node| Hash.from_xml(node.to_s) }
+  end
+
+  private def pet_cat(css)
     pet(css, /cat/i)
   end
 
-  def pet_dog(css)
+  private def pet_dog(css)
     pet(css, /dog/i)
   end
 
-  def pet(css, pet_type_regex)
+  private def pet(css, pet_type_regex)
     # 1. Check the text node.
     text = @xml_doc.at(css)&.text
     return text if text =~ pet_type_regex

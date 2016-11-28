@@ -19,6 +19,7 @@ floorplan_bathrooms: " PhysicalProperty Property Floorplan Bathrooms"
 floorplan_availability: ''
 file_floorplan: " PhysicalProperty Property Floorplan ImageURL"
 file_property: " PhysicalProperty Property Slideshow"
+amenities: ''
 amenities_community: ''
 amenities_floorplan: ''
 pet_dog: ''

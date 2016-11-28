@@ -14,6 +14,7 @@ class CreateProperties < ActiveRecord::Migration[5.0]
       t.float :longitude
       t.json :pet_dog
       t.json :pet_cat
+      t.json :amenities
       t.references :feed, index: true
 
       t.timestamps

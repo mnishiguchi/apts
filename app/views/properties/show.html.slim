@@ -50,8 +50,8 @@ p.text-muted
         td= @property.floorplans.map(&:id).join(',')
       tr
         td 
-          strong Property amenities:
-        td= @property.property_amenities.map(&:id).join(',')
+          strong Amenities:
+        td= @property.amenities
       tr
         td 
           strong Feed source url:

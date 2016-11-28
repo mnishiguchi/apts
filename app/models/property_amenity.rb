@@ -8,6 +8,6 @@
 #  updated_at :datetime         not null
 #
 
-class PropertyAmenity < ApplicationRecord
-  has_many :property_property_amenities
-end
+# class PropertyAmenity < ApplicationRecord
+#   has_many :property_property_amenities
+# end

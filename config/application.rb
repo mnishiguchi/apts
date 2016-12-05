@@ -19,6 +19,14 @@ module Apts
     #   Rails.root.join("lib", "feed_parser"),
     # ]
 
+    # https://github.com/cyu/rack-cors
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
     # https://github.com/blowmage/minitest-rails
     config.generators do |g|
       g.assets   = false

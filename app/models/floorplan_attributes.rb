@@ -45,7 +45,7 @@ class FloorplanAttributes
   private def market_rent_and_effective_rent(css)
     # A hash with downcase keys.
     Hash[
-      @xml_doc.at(css)&.to_h.map { |k, v| [ k.downcase, v ] }
+      @xml_doc.at(css)&.to_h&.map { |k, v| [ k.downcase, v ] }
     ]
   end
 

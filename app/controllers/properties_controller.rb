@@ -6,8 +6,8 @@ class PropertiesController < ApplicationController
   def index
     @properties = Property.all
     respond_to do |format|
-      format.html {}
-      format.json { render json: @properties }
+      format.html { }
+      format.json { render json: Property.where.not(latitude: nil) }
     end
   end
 

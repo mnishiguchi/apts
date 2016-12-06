@@ -85,8 +85,9 @@ class PropertyAttributes
   # FIXME: We still have 0.0's.
   private def parse_float_string(css)
     return nil unless css
-    value = @xml_doc.at(css)&.text&.gsub(/[^0-9\.]/,'')&.to_f
-    value.present? ? value : @xml_doc.at(css)&.text
+    text = @xml_doc.at(css)&.text
+    transformed = text&.gsub(/[^0-9\.\-]/,'')&.to_f
+    (transformed.blank? || transformed == 0.0) ? text : transformed
   end
 
   private def parse_int_string(css)

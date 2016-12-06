@@ -6,11 +6,18 @@ class PropertiesController < ApplicationController
   def index
     @properties = if params["q"].present?
                   then Property.all.by_city_state(params["q"])
-                  else Property.all
+                  else Property.where.not(latitude: nil)
+                               .where.not(latitude: 0.0)
+                               .where.not(city: nil)
                   end
     respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @properties }
+      format.html { }
+      format.json {
+        # This is a temp solution to ignore records without latitude & longitude
+        render json: Property.where.not(latitude: nil)
+                             .where.not(latitude: 0.0)
+                             .where.not(city: nil)
+      }
     end
   end
 

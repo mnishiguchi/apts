@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
 
 
-  resources :floorplans
-  resources :properties
   # ---
-  # Feeds
+  # Feeds, properties and floorplans
   # ---
 
 
   resources :feed_sources, only: [:index, :show]
   resources :field_path_mappings, only: [:show, :edit, :update]
+
+  resources :properties
+  resources :floorplans
 
 
   # ---

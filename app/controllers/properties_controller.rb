@@ -4,9 +4,12 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.all
+    @properties = if params["q"].present?
+                  then Property.all.by_city_state(params["q"])
+                  else Property.all
+                  end
     respond_to do |format|
-      format.html {}
+      format.html { render :index }
       format.json { render json: @properties }
     end
   end

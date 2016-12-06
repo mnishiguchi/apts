@@ -30,8 +30,10 @@ class Property < ApplicationRecord
 
   has_many :floorplans
 
-  # has_many :property_property_amenities, dependent: :destroy
-  # has_many :property_amenities, through: :property_property_amenities
+  scope :by_city_state, ->(q) {
+    where("city ilike ? OR state ilike ? OR zip ilike ?",
+          "%#{q}%", "%#{q}%", "%#{q}%")
+  }
 
   def full_address
     "#{street}, #{city}, #{state} #{zip}"

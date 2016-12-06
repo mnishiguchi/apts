@@ -15,6 +15,8 @@ class PropertyAttributes
       next if css.blank?
 
       case field
+      when "latitude", "longitude"
+        property_attributes[field] = send(field, css)
       when "pet_cat", "pet_dog", "amenities"
         property_attributes[field] = send(field, css)
       else
@@ -72,15 +74,33 @@ class PropertyAttributes
     hash&.map { |k,v| k if v =~ TRUE_REGEX }.flatten.compact
   end
 
+  private def latitude(css)
+    parse_float_string(css)
+  end
+
+  private def longitude(css)
+    parse_float_string(css)
+  end
+
+  # FIXME: We still have 0.0's.
+  private def parse_float_string(css)
+    return nil unless css
+    @xml_doc.at(css)&.text&.gsub(/[^0-9\.]/,'')&.to_f
+  end
+
+  private def parse_int_string(css)
+    parse_float_string(css)&.to_i
+  end
+
   private def pet_cat(css)
-    pet(css, /cat/i)
+    parse_pet_string(css, /cat/i)
   end
 
   private def pet_dog(css)
-    pet(css, /dog/i)
+    parse_pet_string(css, /dog/i)
   end
 
-  private def pet(css, pet_type_regex)
+  private def parse_pet_string(css, pet_type_regex)
     # 1. Check the text node.
     text = @xml_doc.at(css)&.text
     if text =~ pet_type_regex

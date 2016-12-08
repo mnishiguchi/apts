@@ -9,10 +9,10 @@ class PropertiesController < ApplicationController
                   else Property.all
                   end
     respond_to do |format|
-      format.html { }
+      format.html {}
       format.json {
         # This is a temp solution to ignore records without latitude & longitude
-        render json: Property.where.not(latitude: nil)
+        render json: @properties.where.not(latitude: nil)
       }
     end
   end

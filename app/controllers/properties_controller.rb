@@ -22,6 +22,10 @@ class PropertiesController < ApplicationController
   # GET /properties/1
   # GET /properties/1.json
   def show
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @property }
+    end
   end
 
   private
